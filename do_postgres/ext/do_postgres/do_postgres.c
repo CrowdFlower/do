@@ -543,14 +543,14 @@ VALUE do_postgres_cCommand_execute_non_query(int argc, VALUE *argv, VALUE self) 
       insert_id = Qnil;
     }
     else {
-      insert_id = INT2NUM(atoi(PQgetvalue(response, 0, 0)));
+      insert_id = rb_cstr2inum(PQgetvalue(response, 0, 0), 10);
     }
 
-    affected_rows = INT2NUM(atoi(PQcmdTuples(response)));
+    affected_rows = rb_cstr2inum(PQcmdTuples(response), 10);
   }
   else if (status == PGRES_COMMAND_OK) {
     insert_id = Qnil;
-    affected_rows = INT2NUM(atoi(PQcmdTuples(response)));
+    affected_rows = rb_cstr2inum(PQcmdTuples(response), 10);
   }
   else {
     do_postgres_raise_error(self, response, query);
