@@ -835,12 +835,12 @@ static VALUE cCommand_execute_non_query(int argc, VALUE *argv[], VALUE self) {
   status = PQresultStatus(response);
 
   if ( status == PGRES_TUPLES_OK ) {
-    insert_id = INT2NUM(atoi(PQgetvalue(response, 0, 0)));
-    affected_rows = INT2NUM(atoi(PQcmdTuples(response)));
+    insert_id = rb_cstr2inum(PQgetvalue(response, 0, 0), 10);
+    affected_rows = rb_cstr_to_dbl(PQcmdTuples(response), 10);
   }
   else if ( status == PGRES_COMMAND_OK ) {
     insert_id = Qnil;
-    affected_rows = INT2NUM(atoi(PQcmdTuples(response)));
+    affected_rows = rb_cstr2inum(PQcmdTuples(response), 10);
   }
   else {
     raise_error(self, response, query);
