@@ -1,14 +1,12 @@
-require 'lib/data_objects/version'
-
 Gem::Specification.new do |s|
   # basic information
   s.name        = "data_objects"
-  s.version     = DataObjects::VERSION
+  s.version     = '0.10.0'
   s.platform    = Gem::Platform::RUBY
 
   # description and details
   s.summary     = 'DataObjects basic API and shared driver specifications'
-  s.description = "Provide a standard and simplified API for communicating with RDBMS from Ruby"
+  s.description = "Provide a standard and simplified API for communicating with RDBMS from Ruby + fix for bigint ids"
 
   # dependencies
   s.add_dependency "addressable", "~>2.0"
