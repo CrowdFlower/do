@@ -19,6 +19,7 @@ module DataObjects
         when Symbol then quote_symbol(value)
         when Regexp then quote_regexp(value)
         when Class then quote_class(value)
+        when ActiveSupport::Duration then value.to_i
         else
           if value.respond_to?(:to_sql)
             value.to_sql
